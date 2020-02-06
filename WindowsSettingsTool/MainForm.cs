@@ -80,7 +80,7 @@
             }
 
             // Merge single node branches
-            this.MergeSingleNodes(null, this.settingsTree.Nodes);
+            //this.MergeSingleNodes(null, this.settingsTree.Nodes);
 
         }
 
@@ -127,6 +127,7 @@
                 }
 
                 setting = e.Node.Tag as SettingInfo;
+                setting.PropertyGrid = this.settingGrid;
                 if (setting != null)
                 {
                     this.settingGrid.SelectedObject = new

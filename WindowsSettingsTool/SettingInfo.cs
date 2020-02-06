@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WindowsSettingsTool
 {
@@ -17,6 +18,9 @@ namespace WindowsSettingsTool
         public SettingType SettingType { get; private set; }
         public SettingItem SettingItem { get; private set; }
         protected ISettingItem setting { get; private set; }
+
+        [Browsable(false)]
+        public PropertyGrid PropertyGrid { get; set; }
 
         public string Description { get => GetString(() => this.setting.Description); }
         public bool IsEnabled { get => this.setting.IsEnabled; }
@@ -73,6 +77,12 @@ namespace WindowsSettingsTool
             {
                 return Activator.CreateInstance(type, settingId) as SettingInfo;
             }
+        }
+
+        [Browsable(true)]
+        public void aaa()
+        {
+            this.PropertyGrid.SelectedObject = this.SettingItem;
         }
 
         #region IDisposable Support
@@ -202,7 +212,7 @@ namespace WindowsSettingsTool
         {
             this.SettingItem.Invoke();
         }
-        
+
     }
 
     public class SettingVerbs : IMenuCommandService, ISite
